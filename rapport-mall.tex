@@ -26,6 +26,21 @@
 % Designval: vill ni ha en box runt figurer istället för strecken som är default, av-kommentera raden nedan. Obs att både \floatstyle och \restylefloat behövs.
 %\floatstyle{boxed} \restylefloat{figure}
 
+%%%% Stöd för instruktioner i detta dokument
+\newif\ifinstructions\instructionstrue
+% avkommentera nästa rad när ni lämnar in ett utkast, så döljs instruktionerna
+% \instructionsfalse
+\usepackage{iflang}
+\newenvironment{instructions}
+{\ifinstructions
+\IfLanguageName{english}{\textbf{Instructions:}}{\textbf{Instruktioner:}}
+\fi
+}
+{}
+%%%% OBS:
+% När ni inte längre behöver instruktionerna kan ni ta bort allt mellan \begin{instructions} och \end{instructions} (inklusive de raderna),
+% och mellan \ifinstructions och matchande \fi (inklusive de raderna).
+
 \begin{document}
 % För att ställa in parametrar till IEEEtranS/IEEEtranSA behöver detta ligga här (före första \cite).
 % Se se IEEEtran/bibtex/IEEEtran_bst_HOWTO.pdf, avsnitt VII, eller sista biten av IEEEtran/bibtex/IEEEexample.bib.
@@ -35,24 +50,26 @@
 \title{Rapportmall för självständigt arbete} % och uppsatsmetodik
 % Use this if you have a subtitle
 %\subtitle{beskrivande men gärna lockande}
+
 % Set author names, separated by "\\ " (don't forget the space)
-% List authors alphabetically by LAST NAME (unless someone did significantly more/less)
+% List authors alphabetically by LAST NAME (unless someone did significantly more/less, which should not be the case)
 % For drafts, include your email addresses to make it easier to send peer reviews
-\author{Sofia Cassel \\ Björn Victor}
-% Set the date and year - use the right language!
+\author{Sofia Cassel \\ Björn Victor (bjorn.victor@it.uu.se)}
+
+% Visa datum på svenska
 \date{\begin{otherlanguage}{swedish}  %\foreignlanguage doesn't seem to affect \today?
 \today
 \end{otherlanguage}}
 
-% Only need to set the year if it differs from the current year
+% Använd detta om året för rapporten inte är innevarande år
 %\year=2018
 
 % Ange handledare, ämnesgranskare, examinator om dessa finns
 % Extern handledare: t.ex på företag ni arbetat med?
 \exthandledare{Hand Ledare, Firma Ment AB}
-% Intern handledare
+% Intern(a) handledare, i bokstavsordning på efternamnet
 \handledare{NN och Björn Victor}
-% Ämnesgranskare används inte på Självständigt arbete i IT
+% Ämnesgranskare används INTE på Självständigt arbete i IT
 %\reviewer{NN}
 % På Självständigt arbete i IT är detta BV
 \examinator{Björn Victor}
@@ -60,19 +77,18 @@
 % Programnamn på svenska och engelska
 \progname{Civilingenj{\"o}rsprogrammet i informationsteknologi}{Master Programme in Computer and Information Engineering}
 
-% Utgivare
+% Utgivare (ändra ev. för exjobbet i femman)
 \enhetsnamn{Institutionen för \\ informationsteknologi}
 \besoksadress{ITC, Polacksbacken\\ Lägerhyddsvägen 2}
 \postadress{Box 337 \\ 751 05 Uppsala}
-\hemsida{http:/www.it.uu.se}
+\hemsida{https://www.it.uu.se}
 
 % Set the name of the series, and the number in the series
 \seriesname{Självständigt arbete i informationsteknologi}
-% \seriesname{Uppsatsmetodik}
 
 % OBS: Gäller bara exjobb i årskurs 5
 % Get a series number, e.g. from Studentservice Ångström
-%\seriesnumber{UPTEC IT16~0xx}
+%\seriesnumber{UPTEC IT2x~0xx}
 % Use the appropriate ISSN for the series
 %\issn{ISSN 1401-5749}
 % Usually this is where it is printed
@@ -85,6 +101,7 @@
 \frontmatter
 
 \begin{abstract}
+  \begin{instructions}
 Abstract, always in English, about 10-20 lines. Do not use references; do not use formulas if they can be avoided.
 \begin{enumerate}
 \item What is the problem/issue/subject?
@@ -93,10 +110,13 @@ Abstract, always in English, about 10-20 lines. Do not use references; do not us
 \item How good are the results, how useful are they?
 \end{enumerate}
 The abstract should be understandable without reading the whole report (and the rest of the report should be understandable without reading the abstract). You can reuse text/phrases from the Introduction.
+  \end{instructions}
+
 \end{abstract}
 
 \begin{sammanfattning}
-Sammanfattning, alltid på svenska. Se till att det står samma saker i det svenska och det engelska abstractet.
+  \begin{instructions}
+Sammanfattning, alltid på svenska. Se till att det står samma saker i den svenska sammanfattningen och det engelska abstractet.
 \begin{enumerate}
 \item Vad är problemet, ämnet?
 \item Hur angreps/löstes problemet?
@@ -106,7 +126,8 @@ Sammanfattning, alltid på svenska. Se till att det står samma saker i det sven
 
 Ca 10-20 rader. Använd inte referenser; ej heller formler om det går att undvika.
 
-Abstract ska vara förståeligt utan att läsa resten av rapporten, och resten av rapporten ska kunna läsas utan att läsa abstract. Man kan återanvända text från introduktionen.
+Sammanfattningen ska vara förståelig utan att läsa resten av rapporten, och resten av rapporten ska kunna läsas utan att läsa sammanfattningen. Det är helt OK att återanvända text från introduktionen.
+  \end{instructions}
 \end{sammanfattning}
 
 % Innehållsförteckningen här.
@@ -116,12 +137,8 @@ Abstract ska vara förståeligt utan att läsa resten av rapporten, och resten a
 
 \cleardoublepage
 
-
-% Change to main matter style (arabic page numbers, reset page numbers)
-\mainmatter
-
-% Here comes the text of the report.
-
+%%%% Ta bort allt mellan här och \mainmatter (men inte mainmatter) i slutversionen
+\begin{instructions}
 \section*{Hur ni använder detta malldokument}
 Titta i källdokumentet för diverse inställningar för författare, titel, etc.
 
@@ -129,7 +146,10 @@ Titta i källdokumentet för diverse inställningar för författare, titel, etc
 
 I flera appendix finns mer info som inte gäller rapportstrukturen.
 
-I era inlämningar, ta bort (eller kommentera bort) malltexten (beskrivningen av vad som ska stå), men behåll gärna tomma huvudrubriker. Ta också bort mall-appendix.
+För att slippa få med instruktionerna för rapportstrukturen i era inlämningar, avkommentera raden \verb|\instructionsfalse| i källdokumentet.
+
+När ni inte längre behöver instruktionerna kan ni ta bort allt som står mellan raderna \verb|\begin{instructions}| och \verb|\end{instructions}| (inklusive de raderna), och mellan \verb|\ifinstructions| och matchande \verb|\fi| (inklusive de raderna).
+Behåll gärna tomma huvudrubriker (för att inte glömma bort dem).
 
 \subsection*{Generellt}
 Varje numrerat avsnitt ska finnas med i er slutrapport, om inget annat anges.  
@@ -150,9 +170,19 @@ Glöm inte att läsa kurslitteraturen~\cite{dawson:projects-in-computing,dawson:
 \section*{Att göra}
 En sektion som beskriver läget för rapporten kan vara användbart i ``veckans inlämning'' för att underlätta feedbacken.
 
-\newpage %%%%%%%%%%%%%%%% OBS! Ta bort allt mellan \mainmatter och här (inkl \newpage) i slutversionen (men inte \mainmatter)
+För att hantera ``att-göra-listor'' i rapporten kan La\TeX-paketet \verb|todonotes| kanske vara användbart. Se \url{http://ctan.org/pkg/todonotes} för mer info.
+
+\newpage
+  \end{instructions}
+%%%%%%%%%%%%%%%% OBS! Ta bort allt mellan \mainmatter och här (inkl \newpage) i slutversionen
+
+% Change to main matter style (arabic page numbers, reset page numbers)
+\mainmatter
+
+% Here comes the text of the report.
 
 \section{Introduktion eller Inledning / Introduction}
+\begin{instructions}
 Beskriv åtminstone samma saker som i abstract, men mer utförligt -- typiskt 1-2 sidor. Spara tekniska detaljer till senare, eftersom läsaren inte är insatt än.
 
 \begin{enumerate}
@@ -170,15 +200,27 @@ Se till att ni \emph{kommer till kritan snabbt} – man vill inte läsa igenom t
 Översiktlig beskrivning av systemet och dess features ska vara under systemdesign / systemstruktur, inte i introduktionen.
 
 Introduktionen bör vara begriplig för t.ex.~en student i årskursen under, och gärna för en ännu bredare läsarkrets.
+\end{instructions}
+
+\paragraph{Tillkännagivande eller Tack / Acknowledgement}
+\begin{instructions}
+Till\-känna\-gi\-van\-de eller Tack/Acknowledgement behövs inte alltid, utan bara ibland: har man fått avsevärd hjälp/feedback/stöd från någon (utöver det som kan väntas t.ex. av en handledare), har man fått speciellt tillstånd att använda något material eller utrustning, har man fått ekonomisk sponsring (som t.ex. skulle kunna påverka den vetenskapliga opartiskheten)\ldots
+Avsnittet ska vara kort och kärnfullt, typiskt ett stycke. Finns det behov att skriva något längre, diskutera med handledaren först.
+\end{instructions}
+
 
 \section{Bakgrund / Background}
+\begin{instructions}
 Här beskriver ni bakgrunden till ert projekt, d.v.s., det som leder fram till er problemformulering.  Vilket är området, omgivningen, kontextet, bakgrunden för projektet (mer detaljerat och djupare än i introduktionen)?  Beskriv området (t.ex. ljudbehandling, studieplaner, visualisering, autism...).  Beskriv uppdragsgivare, om ni har (men inte för detaljerat).  Tänk på att bakgrunden och problemet måste vara på en generell akademisk nivå och inte bara relaterat till en uppdragsgivare.
 
 Tänk på att bakgrunden kan se längre tillbaka -- hur löste man problemet förr? Innan man började datorisera? Ibland är det både viktigt och intressant (men ibland inte).
 
 Efter att ha läst bakgrunden ska det vara lätt att förstå syfte/mål och att de är viktiga. Ett typiskt bakgrundsavsnitt är 2-3 sidor.
+ 
+\end{instructions}
 
 \section{Syfte, mål, och motivation / Purpose, aims, and motivation}\label{sec:syfte}
+\begin{instructions}
 Här beskriver ni i princip er problemformulering.  I detta avsnitt ska framgå syfte, mål, och motivation med projektet. 
 Dessa behöver dock \emph{inte} vara separata underrubriker.
 
@@ -193,16 +235,20 @@ Se till att ni i detta avsnitt övertygar läsaren om att problemet finns, att d
 \item Visa att problemet är viktigt att lösa, att det behöver lösas.
 \item Visa att problemet inte redan är löst.
 \end{itemize}
+\end{instructions}
 
 \subsection{Avgränsningar / Delimitations}
-Här beskriver ni vad ni \emph{inte} gjort, alltså hur ni valt att begränsa er, och motiverar dessa avgränsningar. Detta förtydligar för läsaren som kanske hade förväntningar ni inte uppfyllt.
+\begin{instructions}
+Här beskriver ni vad ni \emph{inte} gjort, alltså hur ni valt att begränsa er, och motiverar dessa avgränsningar. Detta förtydligar för läsaren som kanske hade för\-vänt\-nin\-gar ni inte uppfyllt.
 
 (I tidiga versioner, men \emph{inte} i slutversionen, kan ni även beskriva vad som bara ska göras om tid/resurser/omständigheter räcker till. De sakerna kan ni då istället beskriva i Framtida arbete.)
+\end{instructions}
 
 \section{Relaterat arbete / Related work}
+\begin{instructions}
 Här beskriver ni liknande system eller projekt, och förklarar hur de relaterar till ert.  Alltså: vad vet ni om läget när det gäller ``det större problemet'' som projektet ska lösa?  Vilka andra har försökt lösa liknande/närliggande problem, eller gjort relaterade/liknande saker/system? Referera! (Se Appendix~\ref{sec:referenser} för mer om hur.)
 
-Liksom för bakgrunden kan relaterat arbete också gå längre tillbaka. Det är inte nödvändigtvis bara datorbaserade/appbaserade/etc lösningar som är relaterade.
+Liksom för bakgrunden kan relaterat arbete också gå längre tillbaka. Det är inte nöd\-vän\-digt\-vis bara datorbaserade/appbaserade/etc lösningar som är relaterade.
 
 Några olika typer av relaterat arbete:
 \begin{itemize}
@@ -228,16 +274,20 @@ Ibland är det bra att gruppera relaterade arbeten (t.ex. appar som löser likna
 Ibland är det effektivt att efter en grupp relaterade arbeten summera hur de relaterar till ert (t.ex. ``dessa appar har dessa liknande finesser, men ingen av dem hanterar X som är en av våra huvudpoänger'').
 
 Försök övertyga läsaren om att ni gjort ett vettigt urval av relaterat arbete (och inte bara beskriver de första google-träffarna). Beskriv gärna hur ni gjort urvalet, och motivera det.
+\end{instructions}
 
 \section{Metod/Tillvägagångssätt/Tekniker eller Method/Approach/Techniques}
+\begin{instructions}
 Här beskriver ni vilka metoder/verktyg/tekniker/approacher ni använt för att lösa problemet / besvara frågeställningen.  Vilka metoder har ni konkret använt för att lösa problemet/bygga systemet?  Vilka tekniker/verktyg använde ni? Observera att det inte är samma sak som att beskriva \emph{hur} ni använde teknikerna/verktygen (det kommer i Del X).
 
 Glöm inte att \emph{motivera} era val av metoder. Finns det flera rimliga alternativ? Beskriv varför ni inte valt dem (t.ex.~varför er valda metod är bättre).
 Visa att det är rimligt att använda just detta tillvägagångssätt.
 
 Detta avsnitt ska \emph{inte} innehålla information om hur gruppen organiserat arbetet (github, trello\ldots) \emph{om} det inte är relevant för resultatet (och det är det oftast inte).
+\end{instructions}
 
 \section{Systemstruktur / System structure}
+\begin{instructions}
 \begin{figure}
 \begin{center}
   \includegraphics[height=5\baselineskip]{logo_name.pdf}
@@ -264,9 +314,10 @@ Var inte för tekniskt detaljerade här.  Tanken är att ge en översikt över s
 Se till att ni använder \emph{samma terminologi} i figurer som visar systemet som i texten. 
 
 Anknyt figurerna till texten på ett tydligt sätt. Om ni t.ex. har separata underrubriker som beskriver olika delar/aspekter av systemstrukturen med tillhörande figur, välj antingen en underrubrik per del i figuren eller använd helt andra underrubriker.  Annars kommer läsaren att undra var underrubriken som beskriver del X är, när det finns underrubriker för alla andra delar.
+\end{instructions}
 
 \section{Krav och utvärderingsmetoder / Requirements and evaluation methods}\label{sec:krav}
-
+\begin{instructions}
 För de olika funktionaliteterna (och/eller motsv) i ert system, hur ska ni avgöra om de är tillräckligt bra utförda/implementerade? Var går gränsen för ``tillräckligt bra''? (Eller när är de ``för dåliga''?)
 
 Skilj på funktionalitet (vad ska systemet kunna göra) och krav (hur bra ska systemet vara). Själva funktionaliteterna har ni redan beskrivit i systemstrukturen eller huvuddelen nedan. (Har ni krav på saker ni beskriver först i huvuddelen kan ni lägga det här avsnittet efter huvuddelen.)
@@ -275,14 +326,18 @@ Skriv tydliga krav \emph{som går att utvärdera}.  (Hur snabbt? Hur många anv�
 
 Beskriv hur utvärderingen ska gå till (automatiserade belastningstester, mätningar, en\-käter, fokusgrupper\ldots).
 Beskriv hur externa intressenter involveras i utvärderingen.
+\end{instructions}
 
+\ifinstructions %%%%%%%%%%%%%%%% början på ett längre instruktionsavsnitt
 \section{DEL x: Implementation av XYZ}\label{sec:delX}
+\begin{instructions}
 Mellan introduktion och avslutning finns ett eller sannolikt \emph{flera} avsnitt (``huvuddelen'') som innehåller själva bidraget eller implementationen.
-Ni får själva välja passande rubriker (INTE ``Huvuddel'' eller ``Bidrag'').  Rubrikerna i huvuddelen ska tillsammans med titeln ge en idé om vad som berättas, en ``berättelse''. (Exempel: ``Algoritm för automatisk igenkänning av stora fötter'', ``Design av databasen för användardata'', ``Optimering av minnesanvändning'', ``Implementation av djupinlärningssystemet'' etc.)
+Ni får själva välja passande rubriker (INTE ``Huvuddel'' eller ``Bidrag'').  Rubrikerna i huvuddelen ska tillsammans med titeln ge en idé om vad som berättas, en ``berättelse''. (Exempel: ``Algoritm för automatisk igenkänning av stora fötter'', ``Design av databasen för användardata'', ``Optimering av minnesanvändning'', ``Implementation av djup\-in\-lär\-nings\-sys\-te\-met'' etc.)
 
 Här kan ni beskriva implementationen, hur systemet används, etc.
 
 Beskriv gärna felhantering och riskanalys: vad kan gå fel när systemet kör/används, vad kan bli följden, och hur hanteras detta?
+\end{instructions}
 
 \section{DEL x+1: Algoritm för igenkänning av stora fötter}
 Se avsnitt~\ref{sec:delX}.
@@ -290,31 +345,40 @@ Se avsnitt~\ref{sec:delX}.
 Se avsnitt~\ref{sec:delX}.
 
 \ldots
+\fi %%%%%%%%%%%%%%%% slut på instruktioner
 
 \section{Utvärderingsresultat / Evaluation results}
-Beskriv resultaten av utvärderingen, när ni tillämpar de utvärderingsmetoder ni beskrivit i avsnitt~\ref{sec:krav}, och relatera utvärderingsresultaten till kraven i samma avsnitt.
+\begin{instructions}
+Beskriv resultaten av utvärderingen, när ni tillämpar de ut\-vär\-de\-rings\-me\-to\-der ni beskrivit i avsnitt~\ref{sec:krav}, och relatera utvärderingsresultaten till kraven i samma avsnitt.
 
 Skilj på utvärderingsmetoder och utvärderingsresultat, och mellan utvärderingsresultat (dvs resultat av användningen av utvärderingsmetoderna) och det större resultatet (nedan).
+\end{instructions}
 
 \section{Resultat och diskussion / Results and discussion}
+\begin{instructions}
 Här beskriver ni först era resultat, vad ni åstadkommit.  Hur bra blev det?
 Sedan granskar ni era resultat kritiskt.  Varför blev det som det blev?  Var resultaten rimliga/bra/dåliga/o\-vän\-ta\-de\ldots?  
 Vad hade man kunnat göra annorlunda?  Hur relaterar era resultat till liknande arbeten?  
 
 \begin{itemize}
 \item Visa att utvärderingen är rimlig.
-\item Visa att utvärderingen, resultatet och analysen är vetenskapliga och ingenjörsmässiga.
+\item Visa att utvärderingen, resultatet och analysen är vetenskapliga och in\-gen\-jörs\-mässiga.
 \end{itemize}
 
 Relatera till mål och syften etc i avsnitt~\ref{sec:syfte}.
+\end{instructions}
 
 \section{Slutsatser / Conclusions}
+\begin{instructions}
 Här sammanfattar ni och upprepar ert bidrag (resultaten av ert projekt) och förklarar dess vikt och användning.  Vad var viktigt/nytt/intressant?  (INTE i termer av vad ni lärde er, utan för den som läser rapporten, funderar på att göra ett liknande system, vidareutveckla ert system, etc.)
+\end{instructions}
 
 \section{Framtida arbete / Future work}
+\begin{instructions}
 Här beskriver ni potentiella framtida utvecklingar av systemet. Var finns förbättrings\-poten\-tial och vad kan man bygga vidare på? Vilka intressanta utvidgningar hann ni inte med?
 
-Observera att risk\-be\-döm\-ning, tids\-planering, relation till kursmål \emph{inte} hör hemma i slutrapporten.
+Observera att tids\-planering, relation till kursmål etc.~\emph{inte} hör hemma i slutrapporten.
+\end{instructions}
 
 % Use one of these:
 %   IEEEtranS gives numbered references like [42] sorted by author,
@@ -330,6 +394,8 @@ Observera att risk\-be\-döm\-ning, tids\-planering, relation till kursmål \emp
 
 \newpage
 \appendix %%%% markerar att resten är appendixar
+%%%% I er egen version, ta bort allt nedan (utom \end{document})
+\ifinstructions
 \section{Hur man gör appendix}
 Appendixar kan vara bra för bilagor som enkätundersökningar, större kodavsnitt, etc. 
 
@@ -338,7 +404,7 @@ Appendix läggs efter referenslistan, och ska börja på en ny sida. Använd \ve
 
 \section{Några tips för La\TeX-användning}
 
-Ett enkelt sätt att använda/\textbf{installera} LaTeX för MacOS är TexShop (\url{http://pages.uoregon.edu/koch/texshop}).
+Ett enkelt sätt att använda/\textbf{installera} LaTeX för MacOS är TexShop\footnote{\url{http://pages.uoregon.edu/koch/texshop}}.
 
 För \textbf{samarbete} när man skriver La\TeX-dokument använder somliga Overleaf (\url{https://www.overleaf.com/}, tips på liknande system är välkomna), men det funkar också att använda git och vanliga texteditorer (t.ex Emacs). I det fallet är det smart att dela upp dokumentet i flera (t.ex. ett per kapitel) som sen inkluderas med \verb|\input{kapitel}|. Ett tips är också att slå på radbrytning i texteditorn, så att konflikter vid incheckningar hanteras per kort rad istället för per jättelång rad.
 
@@ -364,12 +430,17 @@ följt av
 \begin{verbatim}
 Som vi nämnt i avsnitt~\ref{sec.motivation}...
 \end{verbatim}
+eller på engelska (notera ``Section'' med stor inledande bokstav)
+\begin{verbatim}
+As already mentioned in Section~\ref{sec.motivation}...
+\end{verbatim}
+
 
 För att få referenser att inte hamna först efter ett \textbf{radbrott}, använd icke-brytande space \verb|såhär~\cite{fin-bok}|, där tilde-tecknet \verb|~| alltså gör ett obrytbart space. Detta är i princip också alltid rätt att använda före siffror (och i stora tal på engelska, t.ex. \verb|100~000| för 100~000), och förstås också före \verb|\ref{fig}|.
 
-Använd \emph{aldrig} dubbel-backslash \verb|\\| för att få avbrott mellan stycken. Använd alltid dubbel ny rad för detta.
+Använd \emph{aldrig} dubbel-backslash \verb|\\| för att få avbrott mellan stycken. Använd alltid dubbel ny rad för detta. Använd bara \verb|\\| i tabeller o.dyl.
 
-För att göra ett \textbf{sidbrott} där resten av sidan blir tom, använd \verb|\newpage|, inte \verb|\pagebreak|. Det senare är till för att finjustera var latex gör ett automatiskt sidbrott, inte för att avsluta en halvfull sida.
+För att göra ett \textbf{sidbrott} där resten av sidan blir tom, använd \verb|\newpage|, använd inte \verb|\pagebreak|. Det senare är till för att finjustera var latex gör ett automatiskt sidbrott, inte för att avsluta en halvfull sida.
 
 \subsection{Bib\TeX-tips}
 
@@ -386,7 +457,7 @@ month = jun
 \end{verbatim}
 istället för \verb|{jun}| eller \verb|"jun"| eller \verb|"June"| eller \verb|"Juni"|. Då kan nämligen bibliographystyle styra hur det förkortas etc.
 
-Ett verktyg för att hantera BibTeX-filer i MacOS är BibDesk (\url{http://bibdesk.sourceforge.net/}).
+Ett verktyg för att hantera BibTeX-filer i MacOS är BibDesk\footnote{\url{http://bibdesk.sourceforge.net/}}.
 
 \section{Referenser}
 \label{sec:referenser}
@@ -406,21 +477,23 @@ För att göra inställningar för \verb|\bibliographystyle{IEEEtranS/SA}| kan m
 
 Referenserna skrivs i direkt anknytning till det som föranleder referensen (t.ex. ett påstående eller resultat), före eventuellt skiljetecken, och med ett fast mellanslag till föregående ord. I La\TeX, \verb|skriv~\cite{lam86}| för att få en ``non-breaking space''. Se också rapportmallen, och sista stycket på sid 211 i Dawson~\cite{dawson:projects-in-computing}. 
 
-Det är alltså \emph{inte} en bra approach att skriva referenserna efter ett längre stycke (som vissa verkar lära sig att göra, någonstans). Det gör det oftast otydligt vad som egentligen är hämtat från, eller styrks, av referenserna. I vissa fall kan man vilka göra en kort sammanfattning av vad en författare skriver i en artikel el.dyl., men att bara lägga på en referens sist i stycket är inte tillräckligt tydligt. Det är mycket bättre och tydligare att skriva något i stil med ``Lisa Lagom beskriver\verb|~\cite{lagom-bok}| hur X beror av Y och i sin analys visar hon i detalj hur sambandet ser ut\ldots''.
+Man ska alltså \emph{inte} skriva referenserna efter ett längre stycke (som vissa verkar lära sig att göra, någonstans). Det gör det oftast otydligt vad som egentligen är hämtat från, eller styrks, av referenserna. I vissa fall kan man vilka göra en kort sammanfattning av vad en författare skriver i en artikel el.dyl., men att bara lägga på en referens sist i stycket är inte tillräckligt tydligt. Det är mycket bättre och tydligare att inleda stycket med att skriva något i stil med ``Lisa Lagom beskriver\verb|~\cite{lagom-bok}| hur X beror av Y och i sin analys visar hon i detalj hur sambandet ser ut\ldots''.
 
-När man refererar till ``tjocka'' saker som böcker är det lämpligt att ange sidnr 
-(som \verb|\cite[sid 211-214]{dawson:projects-in-computing}|) som blir~\cite[sid 211-214]{dawson:projects-in-computing}, men för ``tunnare'' saker behöver man bara göra det för att speciellt peka ut om man t.ex. menar en viss del av referensen (kanske den tar upp tre olika sätt att göra X och man vill peka på det 3:e, inte de första två).
+När man refererar till ``tjocka'' saker som böcker är det lämpligt att ange sidnummer 
+(som \verb|\cite[sid 211-214]{dawson:projects-in-computing}|) som blir \cite[sid 211-214]{dawson:projects-in-computing}, men för ``tunnare'' saker behöver man bara göra det för att speciellt peka ut om man t.ex. menar en viss del av referensen (kanske den tar upp tre olika sätt att göra X och man vill peka på det 3:e, inte de första två).
 
 För mer info om vilken info som behövs för olika typer av referenser, se avsnitt 8.5.3 i Dawson~\cite{dawson:projects-in-computing,dawson:projects-in-computing-old}. (För att referera till flera saker samtidigt (som nyss) skriver man flera BibTeX-nycklar i samma \verb|\cite|.)
 
 Observera att nyhetsartiklar (tidningsartiklar och motsvarande) nästan alltid har ett publiceringsdatum, som ska visas (t.ex. i \verb|note|-fältet), och oftast också en artikelförfattare.
 
-Använd inte direktcitat, såvida inte den exakta formuleringen är viktig.  Skriv hellre ett referat av vad någon sagt. (Se Dawson.)
+Använd inte direktcitat, såvida inte den exakta formuleringen är viktig.  Skriv hellre ett referat av vad någon sagt. (Se Dawson~\cite{dawson:projects-in-computing,dawson:projects-in-computing-old}.)
 
 Om referenslistan huvudsakligen innehåller referenser till ``mer info'' av typen 
 \url{www.wordpress.org}, \url{www.w3c.org}, \url{developer.android.com}\ldots men få referenser som stöder resonemang, motivation, argument etc (jfr Workshoparna), är det antagligen ett tecken på att det finns få resonemang, motiveringar och argument som behöver stödjas. Då behöver man med största sannolikhet resonera, motivera och argumentera mera!
 
 Även om en referens har en URL till själva texten är det inte nödvändigtvis en webbreferens, utan ibland en artikel/bok el.dyl som råkar vara tllgänglig på nätet. Den ska då beskrivas som artikel/bok/el.dyl (men förstås gärna med URLen) så att man kan göra en preliminär värdering av referensen redan när man läser referenslistan.
+
+Använd gärna Wikipedia som en start för att läsa om något, men ansträng er att hitta stabilare referenser när ni skriver om detta nägot. Kolla vilka referenser Wikipedia-artikeln använder, läs och använd (åtminstone någon av) dem istället.
 
 Försök hitta författare och publiceringsdatum (år, månad) även för webbreferenser, och ange \textbf{alltid} när de lästes, eftersom de kan uppdateras när som helst. Ett exempel är~\cite{berners-lee:cool-uris} (se \texttt{refs.bib}).
 
@@ -431,6 +504,8 @@ Försök hitta författare och publiceringsdatum (år, månad) även för webbre
 
 Formler, figurer och ekvationer måste beskrivas.  Det betyder t.ex. att varje symbol måste vara förklarad i texten.
 
+Låt figurer och tabeller (``floats'') hamna där La\TeX{} tycker att de ska, och justera bara placeringen i slutversionen och om det verkligen behövs, t.ex. för att de flyter iväg flera sidor.
+
 I engelsk text skriver man ``Figure 3'', inte ``figure 3'', eftersom det fungerar som ett namn på figuren (och motsvarande för Table, Section osv).
 
 Alla figurer och bilder som inte är era egna måste ha referenser till källan.
@@ -440,13 +515,15 @@ Rapportmallen är inställd så att figurer presenteras med en linje över, en u
 Om ni inkluderar kodsnuttar, se till att de är relevanta och kommenterade, så att man förstår.  Alternativt, för korta snuttar: ge motsvarande förklaring i texten.
 Använd vettigt latex-bibliotek för kod, t.ex. \texttt{listings}.
 
-\section{Språk och grammatik}
+\section{Språk, grammatik, stil}
 \label{sec:sprak-och-grammatik}
 
 \begin{itemize}
 \item    Det är OK att skriva ``Vi''!
 
-\item    \textbf{Inte alla läsare är män}.  Skriv därför inte ``han'', ``hans'', ``denne'' etc.  Använd könsneutrala pronomen eller ord som ``vederbörande'', ``användaren'' etc.
+\item    \textbf{Inte alla läsare är män}.  Skriv därför inte ``han'', ``hans'', ``denne'' etc.  Använd könsneutrala pronomen eller ord som ``vederbörande'', ``användaren'' etc. 
+
+\item På engelska, undvik det informella \emph{you} som översättning av ``man'' -- undvik också \emph{one} som kan upplevas som alltför formellt (drottningen uttrycker sig så). Skriv ut vem som menas, t.ex. ``the user'' el.dyl., eller använd ``they'' (även i singular).
 
 \item    \textbf{Undvik talspråk} ``så'', ``två stycken saker'', ``ifrån'', ``utav'', ``vart'', ``kommer göra/vara'' (istället för ``kommer att göra/vara'', \ldots \textbf{Kolla på Wikipedia-sidan} ``Vanliga språkfel''~\cite{wp:sprakfel} (länk i vänsterkanten i SP).
 
@@ -454,17 +531,17 @@ Använd vettigt latex-bibliotek för kod, t.ex. \texttt{listings}.
 
 \item Undvik att sluta meningar med en preposition (t.ex. \emph{med} eller \emph{with}).
 
-\item På engelska, undvik det informella \emph{you} som översättning av ``man'' -- undvik också \emph{one} som kan upplevas som alltför formellt (drottningen uttrycker sig så). Skriv ut vem som menas, t.ex. ``the user'' el.dyl.
-
-\item    Semikolon är \textbf{inte} en variant av kolon eller komma; semikolon kan endast användas där ni normalt sett skulle använt punkt, men vill fortsätta på samma mening. För att undvika problem, undvik semikolon helt.
+\item    Semikolon är \textbf{inte} en variant av kolon eller komma; semikolon kan endast an\-vän\-das där ni normalt sett skulle använt punkt, men vill fortsätta på samma mening. För att undvika problem, undvik semikolon helt.
 
 \item    Skriv inte meningar som börjar med ``Detta på grund av'' eller ``Detta eftersom\ldots' -- det blir ofta inte fullständiga meningar och det är ofta inte klart vad ``detta'' syftar på.
 
-\item    Använd inte framtid (futurum); skriv rapporten i nu- eller dåtid och var konsekventa (Vi gör\ldots eller Vi har gjort\ldots, inte Vi kommer att göra\ldots)
+\item    Använd inte framtid (futurum); skriv rapporten i nu- eller dåtid och var konsekventa (Vi gör\ldots eller Vi har gjort\ldots, inte Vi kommer att göra\ldots). 
 
-\item Var noggranna med valet av dåtid eller nutid: skriv inte i nutid om saker som inte nödvändigtvis gäller när texten läses, om det inte är tydligt \emph{när} det gäller.
+\item Var noggranna med valet av dåtid eller nutid: skriv inte i nutid om saker som inte nödvändigtvis gäller när texten läses (t.ex. om fem år), om det inte är tydligt \emph{när} det gäller. Gör det tydligt när det gäller.
 
-\item    \textbf{Förklara begrepp innan ni använder dem}, hänvisa inte \emph{bara} läsaren till ett senare avsnitt (men ni kan naturligtvis också hänvisa till mer detaljerade förklaringar som kommer senare i texten).  Första gången ett begrepp nämns måste alltså åtminstone en kort förklaring finnas.
+\item    \textbf{Förklara begrepp innan ni använder dem}, hänvisa inte \emph{bara} läsaren till ett senare avsnitt (men ni kan naturligtvis också hänvisa till mer detaljerade förklaringar som kommer senare i texten).  Första gången ett begrepp nämns måste alltså åt\-min\-sto\-ne en kort förklaring finnas.
+
+\item Undvik helst att lägga in en ordlista/glossary i början av rapporten. När man läser den kommer begreppen utan kontext och det kan vara svårt att förstå. Det är bättre att förklara begreppen när de behöver förklaras (se ovan).
 
 \item    När ni introducerar nya koncept (sådant ni inte har diskuterat tidigare), gör inte det ``i förbifarten'', utan se till att ni \textbf{förklarar ordentligt}.  Alltså: ``Vi använder X (ett häftigt nytt programmeringsspråk) för att göra Y'' fungerar inte.  Beskriv först konceptet ni använder, och använd det sedan.  Typ ``X är ett viktigt nytt programmeringsspråk.  Vi använder X för att göra Y.''
 
@@ -479,6 +556,9 @@ Använd vettigt latex-bibliotek för kod, t.ex. \texttt{listings}.
 \item    Var försiktig med uttryck som ``this approach'', ``detta system'', etc. och kontrollera att det är uppenbart vad detta/this refererar till. Be någon icke-gruppmedlem läsa och kolla!
 
 \item    De av er som skriver på engelska: ni MÅSTE använda korrekta verbformer beroende på om subjektet är en eller flera saker (``it has'' men ``they have'').
+
+\item Undvik att skriva så här långa punktlistor, och punktlistor med så här mycket text.
 \end{itemize}
+\fi
 
 \end{document}

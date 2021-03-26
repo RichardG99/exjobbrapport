@@ -39,6 +39,13 @@
   \def\@fs@mid{\kern2pt\hrule\kern2pt}%
   \let\@fs@iftopcapt\iffalse}
 
+% Useful font packages for maths and symbols
+\RequirePackage{amssymb,amsmath,amsthm,amsfonts}
+
+% for nice code listings
+\RequirePackage{listings}
+
+
 %\RequirePackage{a4wide}
 
 %%%%%%%%%%%%%%%%
@@ -112,6 +119,23 @@
 \telefax{}
 \hemsida{}
 
+% För självständigt arbete i IT:
+% Programnamn på svenska och engelska
+\progname{Civilingenj{\"o}rsprogrammet i informationsteknologi}{Master Programme in Computer and Information Engineering}
+% Set the name of the series, and the number in the series (not for självständigt arbete i IT)
+\seriesname{Självständigt arbete i informationsteknologi}
+% Utgivare (ändra ev. för exjobbet i femman)
+\enhetsnamn{Institutionen för \\ informationsteknologi}
+%%%% Ändras sannolikt 2022!
+\besoksadress{ITC, Polacksbacken\\ Lägerhyddsvägen 2}
+\postadress{Box 337 \\ 751 05 Uppsala}
+\hemsida{https://www.it.uu.se}
+% Ämnesgranskare används INTE på Självständigt arbete i IT
+%\reviewer{NN}
+% På Självständigt arbete i IT är detta BV
+\examinator{Björn Victor}
+
+
 % För vanliga exjobb:
 % \enhetsnamn{Teknisk-naturvetenskaplig fakultet}
 % \avdelningsnamn{Enheten för studentservice}
@@ -119,6 +143,13 @@
 % \postadress{Box 536\\ 751 21 Uppsala}
 % \telefon{018--471~30~03}
 % \hemsida{http://www.teknat.uu.se/student}
+% OBS: Gäller bara exjobb i årskurs 5
+% Get a series number, e.g. from Studentservice Ångström
+%\seriesnumber{UPTEC IT2x~0xx}
+% Use the appropriate ISSN for the series
+%\issn{ISSN 1401-5749}
+% Usually this is where it is printed
+%\printer{Ångströmlaboratoriet, Uppsala universitet}
 
 %%%%%%%%%%%%%%%%
 

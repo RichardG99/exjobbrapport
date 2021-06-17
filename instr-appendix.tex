@@ -1,12 +1,16 @@
 %%%% Här finns både instruktioner och tips - läs hela!
 
 \section{Hur man gör appendix}
+\label{app:appendix}
 Appendixar kan vara bra för bilagor som enkätundersökningar, större kodavsnitt, etc. 
 
 Appendix läggs efter referenslistan, och ska börja på en ny sida. Använd \verb|\newpage| för att göra ett sidbrott där resten av nuvarande sida är tom. Skriv sen \verb|\appendix| för att markera att resten är appendix, och 
  använd sen vanliga \verb|\section{}| för varje appendix, som kommer att ``numreras'' A, B, C osv.
 
+För att referera till ett appendix, gör likadant som till ett avsnitt (se instruktion \vpageref[nedan]{sec:referera-labels}), till exempel: ``se appendix~\ref{app:latex} för tips om La\TeX-använding (see Appendix~\ref{app:latex} for tips about La\TeX{} usage).''
+
 \section{Några tips för La\TeX-användning}
+\label{app:latex}
 
 Ett enkelt sätt att använda/\textbf{installera} LaTeX för MacOS är TexShop\footnote{\url{http://pages.uoregon.edu/koch/texshop}}.
 
@@ -24,7 +28,8 @@ När man skriver på svenska behöver man ibland ``visa'' var ord (speciellt så
 
 För att formattera \textbf{URLer} bättre (så att t.ex. radbrytning blir snyggare), skriv t.ex. \verb|\url{http://www.it.uu.se/research/group/concurrency}| i texten eller referensen.
 
-För att \textbf{referera} till avsnitt, figurer, tabeller etc, använd \verb|\label{markör}| för att ``sätta ett märke'' i text eller figur, och \verb|\ref{markör}| för att referera till den, t.ex.
+\label{sec:referera-labels}
+För att \textbf{referera} till avsnitt, figurer, tabeller etc, använd \verb|\label{markör}| för att ``sätta ett märke'' i text eller figur, och \verb|\ref{markör}| för att referera till den, t.ex. Läs mer \vpageref{figurers-namn} om hur man benämner avsnitt, figurer osv.
 \begin{verbatim}
 \section{Motivation}
 \label{sec:motivation}
@@ -38,6 +43,7 @@ eller på engelska (notera ``Section'' med stor inledande bokstav)
 \begin{verbatim}
 As already mentioned in Section~\ref{sec.motivation}...
 \end{verbatim}
+Se också appendix~\ref{app:appendix} för hur man gör med appendix.
 
 
 För att få referenser att inte hamna först efter ett \textbf{radbrott}, använd icke-brytande space \verb|såhär~\cite{fin-bok}|, där tilde-tecknet \verb|~| alltså gör ett obrytbart space. Detta är i princip också alltid rätt att använda före siffror (och i stora tal på engelska, t.ex. \verb|100~000| för 100~000), och förstås också före \verb|\ref{fig}|.
@@ -46,11 +52,14 @@ Använd \emph{aldrig} dubbel-backslash \verb|\\| för att få avbrott mellan sty
 
 För att göra ett \textbf{sidbrott} där resten av sidan blir tom, använd \verb|\newpage|, använd inte \verb|\pagebreak|. Det senare är till för att finjustera var latex gör ett automatiskt sidbrott, inte för att avsluta en halvfull sida.
 
+Använd aldrig \textit{math mode} (dvs \verb|$Text$|) för att få kursiv text eller för flerbokstavs-variabler i matematiska uttryck, eftersom text i math mode tolkas som en multiplikation av de olika bokstäverna och då får konstiga mellanrum -- det blir särskilt tydligt där La\TeX{} normalt skulle ha gjort ligaturer (som fi). Använd istället \verb|\textit{Text}| (\textit{Text}) eller \verb|\textsl{Text}| (\textsl{Text}), eller kanske \verb|\textrm{Text}| (\textrm{Text}, speciellt i matematiska uttryck) eller \verb|\textsf{Text}| (\textsf{Text}, speciellt för kod).
+
 \subsection{Bib\TeX-tips}
 
-För att hantera bibliografi (\textbf{referenser}) på ett smidigt sätt, använd BibTeX! (se \url{http://en.wikibooks.org/wiki/LaTeX/Bibliography_Management#BibTeX} och nedan om referenser.)
+För att hantera bibliografi (\textbf{referenser}) på ett smidigt sätt, använd BibTeX! Läs mer i \url{http://en.wikibooks.org/wiki/LaTeX/Bibliography_Management#BibTeX}, nedan om referenser, och
+\texttt{IEEEtran\_bst\_HOWTO.pdf} i directoryt \texttt{IEEEtran/bibtex} i detta Github-repository.
 
-För att se till att BibTeX inte gör namn, förkortningar etc till lowercase, använd \verb|{}| och skriv typ
+För att se till att BibTeX inte gör namn, förkortningar etc till lowercase, använd \verb|{}| och skriv typ:
 \begin{verbatim}
 title = {The {DSP} of {N}ewton applied to {iOS}}
 \end{verbatim}
@@ -61,6 +70,11 @@ month = jun
 \end{verbatim}
 istället för \verb|{jun}| eller \verb|"jun"| eller \verb|"June"| eller \verb|"Juni"|. Då kan nämligen bibliographystyle styra hur det förkortas etc.
 
+Kom ihåg att separera författarnamn med ``and'', inte med komma. Ibland behöver Bib\TeX{} extra hjälp att förstå vad som är för- och efternamn, och \emph{då} är komma rätt att använda. Exempel (se~\cite{whitehead.russel:principia-mathematica} i referenslistan):
+\begin{verbatim}
+{Whitehead, Alfred North and Bertrand Russel}
+\end{verbatim}
+
 Ett verktyg för att hantera BibTeX-filer i MacOS är BibDesk\footnote{\url{http://bibdesk.sourceforge.net/}}.
 
 \section{Referenser}
@@ -68,26 +82,39 @@ Ett verktyg för att hantera BibTeX-filer i MacOS är BibDesk\footnote{\url{http
 
 Se också kap 8.5 i Dawson~\cite{dawson:projects-in-computing}.
 
+\begin{center}
+\fbox{\parbox{30em}{
+\textbf{OBS: viktigt!}
 Det finns åtminstone tre syften med utformningen av referenserna och referenslistan.
 \begin{enumerate}
 \item Man ska hitta referensen (från texten) i referenslistan.
 \item Man ska förstå vad som refereras (vilken typ av referens det är) så att man kan värdera den.
 \item Man ska kunna hitta referensen i verkligheten.
 \end{enumerate}
+Eftersträva alltid att uppnå alla tre.
+}}
+\end{center}
 
 Använd numeriska referenser (IEEE-stil~[42]) eller nyckelordsbaserad~[Lam86], inte fotnotstil. Referenserna sorteras alfabetiskt efter författare/motsv i referenslistan. I LaTeX, använd \verb|\bibliographystyle{IEEEtranS}| eller \verb|{IEEEtranSA}| (eller liknande), se rapportmallen. \textbf{Börja} med att använda \verb|{IEEEtranSA}| som tydligare visar när viss info saknas i bibtex-entries (t.ex. år och författare).
 
-För att göra inställningar för \verb|\bibliographystyle{IEEEtranS/SA}| kan man använda ett speciellt bibtex-entry \texttt{@IEEEtranBSTCTL}, se \texttt{IEEEtran\_bst\_HOWTO.pdf} i directoryt \texttt{IEEEtran/bibtex}, avsnitt VII, eller sista biten av \texttt{IEEEexample.bib} i samma directory.
+För att göra inställningar för \verb|\bibliographystyle{IEEEtranS/SA}| kan man använda ett speciellt bibtex-entry som heter \texttt{@IEEEtranBSTCTL}, se mer info i filen \texttt{IEEEtran\_bst\_HOWTO.pdf} i directoryt \texttt{IEEEtran/bibtex}, avsnitt VII, eller sista biten av \texttt{IEEEexample.bib} i samma directory.
 
 Referenserna skrivs i direkt anknytning till det som föranleder referensen (t.ex. ett påstående eller resultat), före eventuellt skiljetecken, och med ett fast mellanslag till föregående ord. I La\TeX, \verb|skriv~\cite{lam86}| för att få en ``non-breaking space''. Se också rapportmallen, och sista stycket på sid 211 i Dawson~\cite{dawson:projects-in-computing}. 
 
 Man ska alltså \emph{inte} skriva referenserna efter ett längre stycke (som vissa verkar lära sig att göra, någonstans). Det gör det oftast otydligt vad som egentligen är hämtat från, eller styrks, av referenserna. I vissa fall kan man vilka göra en kort sammanfattning av vad en författare skriver i en artikel el.dyl., men att bara lägga på en referens sist i stycket är inte tillräckligt tydligt. Det är mycket bättre och tydligare att inleda stycket med att skriva något i stil med ``Lisa Lagom beskriver\verb|~\cite{lagom-bok}| hur X beror av Y och i sin analys visar hon i detalj hur sambandet ser ut\ldots''.
 
+Att upprepa samma referens ofta i ett stycke (kanske efter varje mening) gör det mer svårläst. Försök att skriva om stycket så att det blir tydligt att det hela bygger på referensen, som lämpligen används tidigt. Exempel: ``I en undersökning av WHO\verb|~\ref{who}| beskrivs följderna av XYZ och de indirekta risker som uppkommer'', och därefter kan de olika följderna och riskerna tas upp i samma stycke utan att det blir otydligt.
+
 När man refererar till ``tjocka'' saker som böcker är det lämpligt att ange sidnummer 
 (som \verb|\cite[sid 211-214]{dawson:projects-in-computing}|) som blir \cite[sid 211-214]{dawson:projects-in-computing}, men för ``tunnare'' saker behöver man bara göra det för att speciellt peka ut om man t.ex. menar en viss del av referensen (kanske den tar upp tre olika sätt att göra X och man vill peka på det 3:e, inte de första två).
 
+Man skriver normalt inte ut titeln på det man refererar om det inte är ett speciellt viktigt verk, typ \emph{Principia Mathematica}~\cite{whitehead.russel:principia-mathematica} eller \emph{On Computable Numbers}~\cite{turing:computable-numbers}. Skriv alltså inte ``I artikeln \emph{How to increase efficiency in databases}~[Ref21] beskriver författarna hur man ökar effektiviteten i databaser\ldots'' utan snarare ``Reffersen beskriver~[Ref21] olika sätt att öka effektiviteten i databaser\ldots''.
+
 För mer info om vilken info som behövs för olika typer av referenser, se avsnitt 8.5.3 i Dawson~\cite{dawson:projects-in-computing,dawson:projects-in-computing-old}. (För att referera till flera saker samtidigt (som nyss) skriver man flera BibTeX-nycklar i samma \verb|\cite|.) 
 Där beskrivs också~\cite[sid 230]{dawson:projects-in-computing} hur man refererar till vad någon bara har sagt, utan att det finns publicerat (``personal communication''). Den typen av referenser är förstås svåra att kolla upp för läsaren, och typiskt ganska svaga, så det är viktigt att det framgår hur ``prominent'' personen som sagt saker är, hur tungt dennas ord ska vägas.
+
+När ni använder referenser som finns i DiVA, utgå från de Bib\TeX-data ni får genom att klicka ``Exportera'' ovanför titeln och välj BibTex, men \emph{dubbelkolla} att resultatet blir bra! Specifikt för tidigare Självständiga arbeten i IT: ersätt bibtex-typen \verb|@misc| med \verb|@techreport| och fältet \verb|series| med \verb|type|. Lägg gärna till själva diva-länken (``Permanent länk'' under ``Länk till poster'') som \verb|url|-fält. Se exempel~\cite{Brane973772,Alstergren1439802} i \texttt{refs.bib}.
+
 
 Observera att nyhetsartiklar (tidningsartiklar och motsvarande) nästan alltid har ett publiceringsdatum, som ska visas (t.ex. i \verb|note|-fältet), och oftast också en artikelförfattare.
 
@@ -98,7 +125,7 @@ Om referenslistan huvudsakligen innehåller referenser till ``mer info'' av type
 
 Även om en referens har en URL till själva texten är det inte nödvändigtvis en webbreferens, utan ibland en artikel/bok el.dyl som råkar vara tllgänglig på nätet. Den ska då beskrivas som artikel/bok/el.dyl (men förstås gärna med URLen) så att man kan göra en preliminär värdering av referensen redan när man läser referenslistan.
 
-Använd gärna Wikipedia som en start för att läsa om något, men ansträng er att hitta stabilare referenser när ni skriver om detta nägot. Kolla vilka referenser Wikipedia-artikeln använder, läs och använd (åtminstone någon av) dem istället.
+Använd gärna Wikipedia eller en populärvetenskaplig artikel som en \emph{start} för att läsa om något, men ansträng er att hitta stabilare referenser när ni skriver om detta nägot. Kolla vilka referenser artikeln använder, läs och använd (åtminstone någon av) dem istället.
 
 Titta på er referenslista och reflektera över vilka typer av referenser ni använt. Är det bara onlinereferenser? Är det bara ``läs-mera-här''-referenser? Eller har ni använt referenser på ett bra sätt för att underbygga era val, resonemang, argument och påståenden?
 
@@ -113,7 +140,10 @@ Formler, figurer och ekvationer måste beskrivas.  Det betyder t.ex. att varje s
 
 Låt figurer och tabeller (``floats'') hamna där La\TeX{} tycker att de ska, och justera bara placeringen i slutversionen och om det verkligen behövs, t.ex. för att de flyter iväg flera sidor.
 
-I engelsk text skriver man ``Figure 3'', inte ``figure 3'', eftersom det fungerar som ett namn på figuren (och motsvarande för Table, Section osv).
+Figurtexter (captions) ska beskriva vad vi ser i figuren, inte bara vad det är för slags figur. Att skriva ``Systemstruktur'' eller ``The structure of our system'' för en bild av systemstrukturen är inte tillräckligt. Hjälp läsaren förstå genom att också (eller istället) beskriva innehållet, t.ex. ``De gröna cirklarna representerar användare, och komponenter med skuggad bakgrund är externa. Indata kommer från vänster, och utdata levereras till höger''. Det räcker alltså \emph{inte} att beskriva figuren i löptexten -- men naturligtvis ska den beskrivas där också.
+
+\label{figurers-namn}
+I engelsk text skriver man ``Figure 3'', inte ``figure 3'', eftersom det fungerar som ett namn på figuren (och motsvarande för Table, Section, Appendix osv).
 
 Alla figurer och bilder som inte är era egna måste ha referenser till källan.
 
@@ -132,7 +162,7 @@ Använd vettigt latex-bibliotek för kod, t.ex. \texttt{listings}.
 
 \item På engelska, undvik det informella \emph{you} som översättning av ``man'' -- undvik också \emph{one} som kan upplevas som alltför formellt (drottningen uttrycker sig så). Skriv ut vem som menas, t.ex. ``the user'' el.dyl., eller använd ``they'' (även i singular).
 
-\item    \textbf{Undvik talspråk} ``så'', ``två stycken saker'', ``ifrån'', ``utav'', ``vart'', ``kommer göra/vara'' (istället för ``kommer att göra/vara'', \ldots \textbf{Kolla på Wikipedia-sidan} ``Vanliga språkfel''~\cite{wp:sprakfel} (länk i vänsterkanten i SP).
+\item    \textbf{Undvik talspråk} ``så'', ``två stycken saker'', ``ifrån'', ``utav'', ``vart'', ``kommer göra/vara'' (istället för ``kommer att göra/vara'', \ldots \textbf{Kolla på Wikipedia-sidan} ``Vanliga språkfel''~\cite{wp:sprakfel}.
 
 \item    Undvik värderande uttryck som enkelt, uppenbart.
 
@@ -162,10 +192,18 @@ Använd vettigt latex-bibliotek för kod, t.ex. \texttt{listings}.
 
 \item    Var försiktig med uttryck som ``this approach'', ``detta system'', etc. och kontrollera att det är uppenbart vad detta/this refererar till. Be någon icke-gruppmedlem läsa och kolla!
 
-\item Undvik kontraktioner (sammandragningar) på engelska: skriv ``do not'' istället för ``don't'', och ``is not'' istället för ``isn't'' osv.
+\item Undvik kontraktioner (sammandragningar) på engelska: skriv ``do not'' istället för ``don't'', och ``is not'' istället för ``isn't'' osv. Var extra försiktig med ``it's'' och ``its'' och ``it is'', och välj rätt.
 
-\item    De av er som skriver på engelska: ni MÅSTE använda korrekta verbformer beroende på om subjektet är en eller flera saker (``it has'' men ``they have'').
+  
+\item På engelska, se upp med skillnaden mellan plural-s och genitiv-s, hur man an\-vän\-der dem tillsammans, och hur det blir när grundordet slutar på s.
+
+\item På engelska måste ni använda korrekta verbformer beroende på om subjektet är en eller flera saker (``it has'' men ``they have'').
 
 \item Undvik att skriva så här långa punktlistor, och punktlistor med så här mycket text.
 \end{itemize}
 
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "rapport-mall"
+%%% End:

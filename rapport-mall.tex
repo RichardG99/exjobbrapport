@@ -1,5 +1,5 @@
 % MUST use a4paper option
-% MAY use twoside, smaller font, and other class
+% MAY use twoside, smaller font, and other class - but not for Självständigt arbete i IT
 \documentclass[a4paper,12pt]{article}
 % Use UTF-8 encoding in input files
 \usepackage[utf8]{inputenc}
@@ -19,10 +19,6 @@
 
 % Designval: vill ni ha en box runt figurer istället för strecken som är default, av-kommentera raden nedan. Obs att både \floatstyle och \restylefloat behövs.
 %\floatstyle{boxed} \restylefloat{figure}
-
-%%%% OBS:
-% När ni inte längre behöver instruktionerna kan ni ta bort allt mellan \begin{instructions} och \end{instructions} (inklusive de raderna),
-% och mellan \ifinstructions och matchande \fi (inklusive de raderna).
 
 \begin{document}
 % För att ställa in parametrar till IEEEtranS/IEEEtranSA behöver detta ligga här (före första \cite).
@@ -123,6 +119,7 @@
 \input{instr-metod}
 
 \section{Systemstruktur / System structure}
+\label{sec:systemstruktur}
 \input{instr-systemstruktur}
 
 \section{Krav och utvärderingsmetoder / Requirements and evaluation methods}

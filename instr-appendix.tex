@@ -106,7 +106,9 @@ Man ska alltså \emph{inte} skriva referenserna efter ett längre stycke (som vi
 Att upprepa samma referens ofta i ett stycke (kanske efter varje mening) gör det mer svårläst. Försök att skriva om stycket så att det blir tydligt att det hela bygger på referensen, som lämpligen används tidigt. Exempel: ``I en undersökning av WHO\verb|~\ref{who}| beskrivs följderna av XYZ och de indirekta risker som uppkommer'', och därefter kan de olika följderna och riskerna tas upp i samma stycke utan att det blir otydligt.
 
 När man refererar till ``tjocka'' saker som böcker är det lämpligt att ange sidnummer 
-(som \verb|\cite[sid 211-214]{dawson:projects-in-computing}|) som blir \cite[sid 211-214]{dawson:projects-in-computing}, men för ``tunnare'' saker behöver man bara göra det för att speciellt peka ut om man t.ex. menar en viss del av referensen (kanske den tar upp tre olika sätt att göra X och man vill peka på det 3:e, inte de första två).
+(som \verb|\cite[sid 211-214]{dawson:projects-in-computing}|) som blir \cite[sid 211-214]{dawson:projects-in-computing}, eller kapitel (som \verb|\cite[kapitel 5]{...}|), men för ``tunnare'' saker behöver man bara göra det för att speciellt peka ut om man t.ex. menar en viss del av referensen (kanske den tar upp tre olika sätt att göra X och man vill peka på det 3:e, inte de första två).
+
+Upprepa inte samma referens (bok, artikel etc) i referenslistan för olika avsnitt, kapitel etc i referensen, utan gör på det sätt som beskrivs i stycket ovan.
 
 Man skriver normalt inte ut titeln på det man refererar om det inte är ett speciellt viktigt verk, typ \emph{Principia Mathematica}~\cite{whitehead.russel:principia-mathematica} eller \emph{On Computable Numbers}~\cite{turing:computable-numbers}. Skriv alltså inte ``I artikeln \emph{How to increase efficiency in databases}~[Ref21] beskriver författarna hur man ökar effektiviteten i databaser\ldots'' utan snarare ``Reffersen beskriver~[Ref21] olika sätt att öka effektiviteten i databaser\ldots''.
 
@@ -115,6 +117,7 @@ Där beskrivs också~\cite[sid 230]{dawson:projects-in-computing} hur man refere
 
 När ni använder referenser som finns i DiVA, utgå från de Bib\TeX-data ni får genom att klicka ``Exportera'' ovanför titeln och välj BibTex, men \emph{dubbelkolla} att resultatet blir bra! Specifikt för tidigare Självständiga arbeten i IT: ersätt bibtex-typen \verb|@misc| med \verb|@techreport| och fältet \verb|series| med \verb|type|. Lägg gärna till själva diva-länken (``Permanent länk'' under ``Länk till poster'') som \verb|url|-fält. Se exempel~\cite{Brane973772,Alstergren1439802} i \texttt{refs.bib}.
 
+Använd inte URLer till universitetets ezproxy-tjänst (t.ex.~\url{www-sis-se.ezproxy.its.uu.se}), eftersom den bara kan användas av personer med UU-konto. Använd en direkt länk eller en DOI-länk istället.
 
 Observera att nyhetsartiklar (tidningsartiklar och motsvarande) nästan alltid har ett publiceringsdatum, som ska visas (t.ex. i \verb|note|-fältet), och oftast också en artikelförfattare.
 

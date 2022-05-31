@@ -14,7 +14,7 @@ För att referera till ett appendix, gör likadant som till ett avsnitt (se inst
 
 Ett enkelt sätt att använda/\textbf{installera} LaTeX för MacOS är TexShop\footnote{\url{http://pages.uoregon.edu/koch/texshop}}.
 
-För \textbf{samarbete} när man skriver La\TeX-dokument använder somliga Overleaf (\url{https://www.overleaf.com/}, tips på liknande system är välkomna), men det funkar också att använda git och vanliga texteditorer (t.ex Emacs). I det fallet är det smart att dela upp dokumentet i flera (t.ex. ett per kapitel) som sen inkluderas med \verb|\input{kapitel}|. Ett tips är också att slå på radbrytning i texteditorn, så att konflikter vid incheckningar hanteras per kort rad istället för per jättelång rad.
+För \textbf{samarbete} när man skriver La\TeX-dokument använder somliga Overleaf (\url{https://www.overleaf.com/}, tips på liknande system är välkomna), men det funkar också att använda git och vanliga texteditorer (t.ex Emacs). Det är oftast smart att dela upp dokumentet i flera (t.ex. ett per kapitel) som sen inkluderas med \verb|\input{kapitel}|. Ett tips är också att slå på radbrytning i texteditorn, så att konflikter vid incheckningar hanteras per kort rad istället för per jättelång rad.
 
 \textbf{Läs också i Wikibooks} (\url{http://en.wikibooks.org/wiki/LaTeX}), \textbf{missa inte} Appendix om ``Sample LaTeX documents'' (men använd alltid rapportmallen som bas).
 
@@ -26,10 +26,11 @@ När man skriver på svenska behöver man ibland ``visa'' var ord (speciellt så
 ämnes\-över\-sikts\-intro\-duk\-tion
 \end{verbatim}
 
-För att formattera \textbf{URLer} bättre (så att t.ex. radbrytning blir snyggare), skriv t.ex. \verb|\url{http://www.it.uu.se/research/group/concurrency}| i texten eller referensen.
+För att formattera \textbf{URLer} bättre (så att t.ex. radbrytning blir snyggare), skriv t.ex. \verb|\url{https://www.it.uu.se/research/group/concurrency}| i texten eller referensen.
 
 \label{sec:referera-labels}
-För att \textbf{referera} till avsnitt, figurer, tabeller etc, använd \verb|\label{markör}| för att ``sätta ett märke'' i text eller figur, och \verb|\ref{markör}| för att referera till den, t.ex. Läs mer \vpageref{figurers-namn} om hur man benämner avsnitt, figurer osv.
+För att \textbf{referera} till avsnitt, figurer, tabeller etc, använd \verb|\label{markör}| för att ``sätta ett märke'' i text eller figur, och \verb|\ref{markör}| för att referera till den (se exempel nedan).  Ibland kan man behöva underlätta för läsaren att hitta det man refererar till, och då är macrot \verb|\vref| väldigt kraftfullt.\footnote{Se \url{https://www.ctan.org/pkg/varioref} för mer info om varioref.}
+Läs mer \vpageref{figurers-namn} om hur man benämner avsnitt, figurer osv.
 \begin{verbatim}
 \section{Motivation}
 \label{sec:motivation}
@@ -37,13 +38,13 @@ För att \textbf{referera} till avsnitt, figurer, tabeller etc, använd \verb|\l
 
 följt av
 \begin{verbatim}
-Som vi nämnt i avsnitt~\ref{sec.motivation}...
+Som vi nämnt i avsnitt~\ref{sec:motivation}...
 \end{verbatim}
 eller på engelska (notera ``Section'' med stor inledande bokstav)
 \begin{verbatim}
-As already mentioned in Section~\ref{sec.motivation}...
+As already mentioned in Section~\ref{sec:motivation}...
 \end{verbatim}
-Se också appendix~\ref{app:appendix} för hur man gör med appendix.
+Se också appendix~\vref{app:appendix} för hur man gör med appendix.
 
 
 För att få referenser att inte hamna först efter ett \textbf{radbrott}, använd icke-brytande space \verb|såhär~\cite{fin-bok}|, där tilde-tecknet \verb|~| alltså gör ett obrytbart space. Detta är i princip också alltid rätt att använda före siffror (och i stora tal på engelska, t.ex. \verb|100~000| för 100~000), och förstås också före \verb|\ref{fig}|.

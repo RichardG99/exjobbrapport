@@ -3,6 +3,8 @@
 \documentclass[a4paper,12pt]{article}
 % Use UTF-8 encoding in input files
 \usepackage[utf8]{inputenc}
+% Use T1 font encoding to make the \hyphenation command work with UTF-8
+\usepackage[T1]{fontenc}
 
 % Om ni skriver på svenska, använd denna rad:
 \usepackage[english,swedish]{babel}
@@ -11,6 +13,15 @@
 
 % Use the template for thesis reports
 \usepackage{UppsalaExjobb}
+
+% För att göra ett index behövs
+%  - \usepackage{makeidx}
+%  - \makeindex i "preamble", dvs före \begin{document}
+%  - \printindex, typiskt sist, före \end{document}
+% - och att man lägger in \index{ord} på olika ställen i dokumentet
+\usepackage{makeidx}
+\makeindex
+
 
 % Designval: per default används styckesindrag, men ibland blir det snyggare/mer lättläst med tomrad mellan stycken. Det åstadkoms av de följande raderna.
 % Tycker ni om styckesindrag mera, kommentera bort nästa två rader.
@@ -30,7 +41,7 @@
 \title{Rapportmall för självständigt arbete} % och uppsatsmetodik
 % Use this if you have a subtitle
 %\subtitle{beskrivande men gärna lockande}
-\subtitle{version maj 2022}
+\subtitle{version vinter 2022}
 
 % Set author names, separated by "\\ " (don't forget the space, or use newline)
 % List authors alphabetically by LAST NAME (unless someone did significantly more/less, which should not be the case)
@@ -164,4 +175,23 @@
 %%%% I er egen version, ta bort allt nedan (utom \end{document})
 \input{instr-appendix}
 
+% Om ni har ett index
+\makeatletter
+\renewenvironment{theindex}
+               {\if@twocolumn
+                  \@restonecolfalse
+                \else
+                  \@restonecoltrue
+                \fi
+                \twocolumn[\section{\indexname}]%
+                \@mkboth{\MakeUppercase\indexname}%
+                        {\MakeUppercase\indexname}%
+                \thispagestyle{plain}\parindent\z@
+                \parskip\z@ \@plus .3\p@\relax
+                \columnseprule \z@
+                \columnsep 35\p@
+                \let\item\@idxitem}
+               {\if@restonecol\onecolumn\else\clearpage\fi}
+\makeatother
+\printindex
 \end{document}
